@@ -1,5 +1,19 @@
 from django import forms
 from .models import Restaurant
+from django.contrib.auth.models import User
+
+class SignupForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username','password','is_superuser']
+
+        widgets={
+        'password': forms.PasswordInput(),
+        }
+
+class SigninForm(forms.Form):
+    username = forms.CharField(required=True)
+    password = forms.CharField(required=True, widget=forms.PasswordInput())
 
 class RestaurantForm(forms.ModelForm):
     class Meta:
